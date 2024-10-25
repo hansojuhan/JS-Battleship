@@ -60,16 +60,35 @@ describe('Gameboard', () => {
     // Try placing in column 7 (7 + 5 = 12)
     expect(gameboard.placeShip(carrier, 8, 7, 'horizontal')).toBe(false);
 
+    // Clean out board.
+    gameboard.resetBoard();
+
     expect(gameboard.placeShip(carrier, 8, 7, 'vertical')).toBe(false);
 
-    // Place ship at coordinate x, coordinate y, 'horizontally'
-    expect(gameboard.placeShip(carrier, 8, 5, 'horizontal')).toBe(true);
+    // Clean out board.
+    gameboard.resetBoard();
 
-    // Place ship at coordinate x, coordinate y, 'horizontally'
+    expect(gameboard.placeShip(carrier, 8, 5, 'horizontal')).toBe(true);
+    
+    // Clean out board.
+    gameboard.resetBoard();
+
     expect(gameboard.placeShip(carrier, 5, 7, 'vertical')).toBe(true);
+
   });
 
-  // test('should not be able to place a ship on top of another ship', () => {});
+  test('should not be able to place a ship on top of another ship', () => {
+    const gameboard = new Gameboard();
+    
+    const carrier = new Ship(5);
+    const destroyer = new Ship(4);
+
+    // Place the first ship
+    gameboard.placeShip(carrier, 2, 0, 'horizontal');
+
+    // Try to place another on top
+    expect(gameboard.placeShip(destroyer, 0, 1, 'vertical')).toBe(false);
+  });
 
   // test('returns false if orientation is not specified', () => {});
 });
