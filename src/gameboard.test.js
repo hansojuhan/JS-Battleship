@@ -19,20 +19,36 @@ describe('Gameboard', () => {
     const gameboard = new Gameboard();
     const submarine = new Ship(3);
 
-    // Place ship at coordinate x, coordinate y
-    expect(gameboard.placeShip(submarine, 0, 0)).toBe(true);
+    // Place ship at coordinate x, coordinate y, vertically
+    expect(gameboard.placeShip(submarine, 0, 0, 'vertical')).toBe(true);
+
+    // Check each square on the board and verify only 3 have been filled in
+    for (let x = 0; x < 10; x++) {
+      for (let y = 0; y < 10; y++) {
+        if ((x == 0 && y == 0) || (x == 1 && y == 0) || (x == 2 && y == 0)) {
+          expect(gameboard.board[x][y]).toBe(1);
+        } else {
+          expect(gameboard.board[x][y]).toBe(0);
+        }
+      }
+    }
   });
 
-  test('should be able to place a ship in the area horizontally', () => {
-  });
+  // test('should be able to place a ship in the area horizontally', () => {
+  //   const gameboard = new Gameboard();
+  //   const submarine = new Ship(3);
 
-  test('should not be able to place a ship out of bounds', () => {
+  //   // Place ship at coordinate x, coordinate y, 'horizontally'
+  //   expect(gameboard.placeShip(submarine, 0, 0, 'horizontal')).toBe(true);
+  // });
+
+  // test('should not be able to place a ship out of bounds', () => {
 
 
-  });
+  // });
 
-  test('should not be able to place a ship on top of another ship', () => {
-  });
+  // test('should not be able to place a ship on top of another ship', () => {
+  // });
 
 // test('should create a ship with the correct length, times hit and sunk status', () => {
 //     const ship = new Ship(4);
