@@ -3,7 +3,7 @@ const Gameboard = require('./gameboard');
 const Ship = require('./ship');
 
 describe('Gameboard', () => {
-  test.skip('should create a gameboard with a 10x10 area', () => {
+  test('should create a gameboard with a 10x10 area', () => {
     const gameboard = new Gameboard();
 
     // 10 rows
@@ -14,8 +14,10 @@ describe('Gameboard', () => {
       expect(gameboard.board[i].length).toBe(10);
     }
   });
+});
 
-  test.skip('should be able to place a ship in the area vertically', () => {
+describe('Gameboard placeShip', () => {
+  test('should be able to place a ship in the area vertically', () => {
     const gameboard = new Gameboard();
     const submarine = new Ship(3);
 
@@ -34,7 +36,7 @@ describe('Gameboard', () => {
     }
   });
 
-  test.skip('should be able to place a ship in the area horizontally', () => {
+  test('should be able to place a ship in the area horizontally', () => {
     const gameboard = new Gameboard();
     const submarine = new Ship(3);
 
@@ -53,7 +55,7 @@ describe('Gameboard', () => {
     }
   });
 
-  test.skip('should not be able to place a ship out of bounds', () => {
+  test('should not be able to place a ship out of bounds', () => {
     const gameboard = new Gameboard();
     const carrier = new Ship(5);
     
@@ -77,7 +79,7 @@ describe('Gameboard', () => {
 
   });
 
-  test.skip('should not be able to place a ship on top of another ship', () => {
+  test('should not be able to place a ship on top of another ship', () => {
     const gameboard = new Gameboard();
     
     const carrier = new Ship(5);
@@ -90,7 +92,7 @@ describe('Gameboard', () => {
     expect(gameboard.placeShip(destroyer, 0, 1, 'vertical')).toBe(false);
   });
 
-  test.skip('returns false if orientation is not specified', () => {
+  test('returns false if orientation is not specified', () => {
     const gameboard = new Gameboard();
     const carrier = new Ship(5);
     
@@ -100,7 +102,7 @@ describe('Gameboard', () => {
 });
 
 describe('Gameboard receiveAttack', () => {
-  test.skip('returns true if attack hit a ship', () => {
+  test('returns true if attack hit a ship', () => {
     const gameboard = new Gameboard();
     const submarine = new Ship(3);
     gameboard.placeShip(submarine, 0, 0, 'vertical');
@@ -108,7 +110,7 @@ describe('Gameboard receiveAttack', () => {
     expect(gameboard.receiveAttack(0, 0)).toBe(true);
   });
 
-  test.skip('should send hit to the correct Ship if attack hit a ship', () => {
+  test('should send hit to the correct Ship if attack hit a ship', () => {
     const gameboard = new Gameboard();
 
     const submarine = new Ship(3);
@@ -123,7 +125,7 @@ describe('Gameboard receiveAttack', () => {
     expect(submarine.timesHit).toBe(1);
   });
 
-  test.skip('should record coordinates of missed shot, if missed', () => {
+  test('should record coordinates of missed shot, if missed', () => {
     const gameboard = new Gameboard();
 
     const destroyer = new Ship(2);
@@ -138,13 +140,13 @@ describe('Gameboard receiveAttack', () => {
 });
 
 describe('Gameboard allShipsSunk', () => {
-  test.skip('returns true if no ships on board', () => {
+  test('returns true if no ships on board', () => {
     const gameboard = new Gameboard();
 
     expect(gameboard.allShipsSunk()).toBe(true);
   });
 
-  test.skip('returns false if at least one unsunk ship', () => {
+  test('returns false if at least one unsunk ship', () => {
     const gameboard = new Gameboard();
     const submarine = new Ship(3);
     gameboard.placeShip(submarine, 0, 0, 'vertical');
@@ -170,5 +172,5 @@ describe('Gameboard allShipsSunk', () => {
 });
 
 // describe('Gameboard', () => {
-//   test.skip('', () => {});
+//   test('', () => {});
 // });

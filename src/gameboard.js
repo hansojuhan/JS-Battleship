@@ -32,8 +32,6 @@ class Gameboard {
         // For vertical, y is constant, x is changing
         for (let i = 0; i < ship.length; i++) {
           if (this.board[x][y] == 0) {
-            // If square is free, mark as occupied
-            // this.board[x][y] = 1;
             // Push coordinates to be written in the end
             writeCoordinates.push([x, y]);
           } else {
@@ -51,9 +49,6 @@ class Gameboard {
         // For horizontal, y is changing, x is constant
         for (let i = 0; i < ship.length; i++) {
           if (this.board[x][y] == 0) {
-            // If square is free, mark as occupied
-            // this.board[x][y] = 1;
-
             writeCoordinates.push([x, y]);
           } else {
             return false;
