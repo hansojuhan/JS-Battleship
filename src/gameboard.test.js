@@ -90,5 +90,11 @@ describe('Gameboard', () => {
     expect(gameboard.placeShip(destroyer, 0, 1, 'vertical')).toBe(false);
   });
 
-  // test('returns false if orientation is not specified', () => {});
+  test('returns false if orientation is not specified', () => {
+    const gameboard = new Gameboard();
+    const carrier = new Ship(5);
+    
+    // Place the first ship
+    gameboard.placeShip(carrier, 2, 0);
+  });
 });

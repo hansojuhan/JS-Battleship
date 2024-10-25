@@ -16,23 +16,9 @@ class Gameboard {
   // Input Ship, coordinate x, coordinate y, 'horizontal' or 'vertical' placement
   // Returns true if ship was successfully placed on the board
   // Returns false if ship was out of bounds or on top of another ship
-  placeShip(ship, coordinateX, coordinateY, orientation) {
+  placeShip(ship, x, y, orientation) {
 
-    let x = coordinateX;
-    let y = coordinateY;
-
-    /**
-     * instead of immediately marking done 1s,
-     * run a check of the whole length first
-     * 
-     * if board is free, add the coordinates into an array
-     * keep pushing coordinates until the end
-     * 
-     * if length is not empty, return false
-     * if lenfth is empty, run another loop and 
-     * for each coordinate in the array, write the 1
-     */
-
+    // Save ship coordinates to be written after checking all cells
     let writeCoordinates = [];
 
     switch (orientation) {
@@ -84,7 +70,6 @@ class Gameboard {
       this.board[coordinate[0]][coordinate[1]] = 1;
     });
 
-    // In case of success, return true
     return true;
   }
 }
