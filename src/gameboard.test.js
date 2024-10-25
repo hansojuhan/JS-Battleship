@@ -120,10 +120,21 @@ describe('Gameboard receiveAttack', () => {
 
     gameboard.receiveAttack(0, 0);
 
-    // expect(submarine.timesHit).toBe(1);
+    expect(submarine.timesHit).toBe(1);
   });
 
-  test.skip('', () => {});
+  test('should record coordinates of missed shot, if missed', () => {
+    const gameboard = new Gameboard();
+
+    const destroyer = new Ship(2);
+    gameboard.placeShip(destroyer, 3, 3, 'vertical');
+
+    // receiveAttack() returns false in case of a miss 
+    expect(gameboard.receiveAttack(0, 0)).toBe(false);
+
+    // On the board, a missed shot is marked as 2
+    expect(gameboard.board[0][0]).toBe(2);
+  });
 
   test.skip('', () => {});
 

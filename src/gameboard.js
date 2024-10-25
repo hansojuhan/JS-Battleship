@@ -83,6 +83,9 @@ class Gameboard {
 
     // Check if cell with coordinates contains a ship
     if (this.board[x][y] == 0) {
+      // Mark as missed
+      this.board[x][y] = 2;
+
       return false;
     }
 
