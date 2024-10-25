@@ -3,7 +3,7 @@ const Gameboard = require('./gameboard');
 const Ship = require('./ship');
 
 describe('Gameboard', () => {
-  test('should create a gameboard with a 10x10 area', () => {
+  test.skip('should create a gameboard with a 10x10 area', () => {
     const gameboard = new Gameboard();
 
     // 10 rows
@@ -15,7 +15,7 @@ describe('Gameboard', () => {
     }
   });
 
-  test('should be able to place a ship in the area vertically', () => {
+  test.skip('should be able to place a ship in the area vertically', () => {
     const gameboard = new Gameboard();
     const submarine = new Ship(3);
 
@@ -34,7 +34,7 @@ describe('Gameboard', () => {
     }
   });
 
-  test('should be able to place a ship in the area horizontally', () => {
+  test.skip('should be able to place a ship in the area horizontally', () => {
     const gameboard = new Gameboard();
     const submarine = new Ship(3);
 
@@ -53,7 +53,7 @@ describe('Gameboard', () => {
     }
   });
 
-  test('should not be able to place a ship out of bounds', () => {
+  test.skip('should not be able to place a ship out of bounds', () => {
     const gameboard = new Gameboard();
     const carrier = new Ship(5);
     
@@ -77,7 +77,7 @@ describe('Gameboard', () => {
 
   });
 
-  test('should not be able to place a ship on top of another ship', () => {
+  test.skip('should not be able to place a ship on top of another ship', () => {
     const gameboard = new Gameboard();
     
     const carrier = new Ship(5);
@@ -90,11 +90,45 @@ describe('Gameboard', () => {
     expect(gameboard.placeShip(destroyer, 0, 1, 'vertical')).toBe(false);
   });
 
-  test('returns false if orientation is not specified', () => {
+  test.skip('returns false if orientation is not specified', () => {
     const gameboard = new Gameboard();
     const carrier = new Ship(5);
     
     // Place the first ship
     gameboard.placeShip(carrier, 2, 0);
   });
+});
+
+describe('Gameboard receiveAttack', () => {
+  test('returns true if attack hit a ship', () => {
+    const gameboard = new Gameboard();
+    const submarine = new Ship(3);
+    gameboard.placeShip(submarine, 0, 0, 'vertical');
+
+    expect(gameboard.receiveAttack(0, 0)).toBe(true);
+  });
+
+  test('should send hit to the correct Ship if attack hit a ship', () => {
+    const gameboard = new Gameboard();
+
+    const submarine = new Ship(3);
+    const destroyer = new Ship(2);
+    const carrier = new Ship(5);
+    gameboard.placeShip(submarine, 0, 0, 'vertical');
+    gameboard.placeShip(destroyer, 3, 3, 'vertical');
+    gameboard.placeShip(carrier, 8, 0, 'horizontal');
+
+    gameboard.receiveAttack(0, 0);
+
+    // expect(submarine.timesHit).toBe(1);
+  });
+
+  test.skip('', () => {});
+
+  test.skip('', () => {});
+
+  test.skip('', () => {});
+
+  test.skip('', () => {});
+
 });

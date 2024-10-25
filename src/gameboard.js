@@ -1,4 +1,6 @@
 class Gameboard {
+  _coordinateMap = new Map(); 
+
   constructor() {
     // 10x10 ocean board
     this.board = new Array(10).fill(null).map(() => new Array(10).fill(0));
@@ -68,7 +70,27 @@ class Gameboard {
     // Write coordinates
     writeCoordinates.forEach(coordinate => {
       this.board[coordinate[0]][coordinate[1]] = 1;
+      this._coordinateMap.set(`${coordinate[0]},${coordinate[1]}`, ship);
     });
+    
+    return true;
+  }
+
+  // Takes a pair of coordinates, determines whether or not the attack hit a ship 
+  // and then sends the ‘hit’ function to the correct ship, 
+  // or records the coordinates of the missed shot.
+  receiveAttack(x, y) {
+
+    // Check if cell with coordinates contains a ship
+    if (this.board[x][y] == 0) {
+      return false;
+    }
+
+    // Find the right ship on the coordinate
+    const ship = this._coordinateMap.get(`${x},${y}`);
+
+    // Hit the ship
+    ship.hit();
 
     return true;
   }
