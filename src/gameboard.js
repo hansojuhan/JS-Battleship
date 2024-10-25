@@ -14,6 +14,8 @@ class Gameboard {
 
     switch (orientation) {
       case 'vertical':
+        // Check for out of bounds
+        if (ship.length + x > 10) { return false; }
         
         // For vertical, y is constant, x is changing
         for (let i = 0; i < ship.length; i++) {
@@ -26,6 +28,8 @@ class Gameboard {
         break;
 
       case 'horizontal':
+        // Check for out of bounds
+        if (ship.length + y > 10) { return false; }
 
         // For horizontal, y is changing, x is constant
         for (let i = 0; i < ship.length; i++) {

@@ -53,54 +53,23 @@ describe('Gameboard', () => {
     }
   });
 
-  // test('should not be able to place a ship out of bounds', () => {
-
-
-  // });
-
-  // test('should not be able to place a ship on top of another ship', () => {
-  // });
-
-// test('should create a ship with the correct length, times hit and sunk status', () => {
-//     const ship = new Ship(4);
-
-//     expect(ship.length).toBe(4);
-//     expect(ship.timesHit).toBe(0);
-//     expect(ship.isSunk()).toBe(false);
-
-//   });
-
-//   test('should increment timesHit when hit() is called', () => {
-//     const ship = new Ship(4);
+  test('should not be able to place a ship out of bounds', () => {
+    const gameboard = new Gameboard();
+    const carrier = new Ship(5);
     
-//     ship.hit();
-//     expect(ship.timesHit).toBe(1);
+    // Try placing in column 7 (7 + 5 = 12)
+    expect(gameboard.placeShip(carrier, 8, 7, 'horizontal')).toBe(false);
 
-//     ship.hit();
-//     expect(ship.timesHit).toBe(2);
+    expect(gameboard.placeShip(carrier, 8, 7, 'vertical')).toBe(false);
 
-//     ship.hit();
-//     ship.hit();
-//     expect(ship.timesHit).toBe(4);
-//   });
+    // Place ship at coordinate x, coordinate y, 'horizontally'
+    expect(gameboard.placeShip(carrier, 8, 5, 'horizontal')).toBe(true);
 
-//   test('should sink the ship when hits are equal or more than the length', () => {
-//     const ship = new Ship(4);
-//     ship.hit();
-//     ship.hit();
-//     ship.hit();
-//     ship.hit();
-//     expect(ship.isSunk()).toBe(true);
+    // Place ship at coordinate x, coordinate y, 'horizontally'
+    expect(gameboard.placeShip(carrier, 5, 7, 'vertical')).toBe(true);
+  });
 
-//     ship.hit();
-//     expect(ship.isSunk()).toBe(true);
-//   });
+  // test('should not be able to place a ship on top of another ship', () => {});
 
-//   test('shoud not sink the ship if hits are less than length', () => {
-//     const ship = new Ship(4);
-//     ship.hit();
-//     ship.hit();
-//     ship.hit();
-//     expect(ship.isSunk()).toBe(false);
-//   });
+  // test('returns false if orientation is not specified', () => {});
 });
