@@ -53,7 +53,7 @@ describe('Gameboard', () => {
     }
   });
 
-  test('should not be able to place a ship out of bounds', () => {
+  // test('should not be able to place a ship out of bounds', () => {
 
 
   // });

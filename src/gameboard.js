@@ -9,37 +9,30 @@ class Gameboard {
   // Returns false if ship was out of bounds or on top of another ship
   placeShip(ship, coordinateX, coordinateY, orientation) {
 
-    const length = ship.length;
-    const x = coordinateX;
-    const y = coordinateY;
-    let i;
+    let x = coordinateX;
+    let y = coordinateY;
 
     switch (orientation) {
       case 'vertical':
         
         // For vertical, y is constant, x is changing
-        for (let x = 0; x < ship.length; x++) {
+        for (let i = 0; i < ship.length; i++) {
           if (this.board[x][y] == 0) {
             // If square is free, mark as occupied
             this.board[x][y] = 1;
-          } else {
-            // If square is not free, return false
-            return false;
+            x++;
           }
         }
         break;
 
       case 'horizontal':
 
-        // For vertical, i = always y
-        i = x;
-        for (let j = 0; j < ship.length; j++) {
-          if (this.board[i][j] == 0) {
+        // For horizontal, y is changing, x is constant
+        for (let i = 0; i < ship.length; i++) {
+          if (this.board[x][y] == 0) {
             // If square is free, mark as occupied
-            this.board[i][j] = 1;
-          } else {
-            // If square is not free, return false
-            return false;
+            this.board[x][y] = 1;
+            y++;
           }
         }
         break;
