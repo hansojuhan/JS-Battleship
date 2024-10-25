@@ -1,5 +1,6 @@
 class Gameboard {
-  _coordinateMap = new Map(); 
+  _coordinateMap = new Map(); // Keeps track of coordinates and ships on those coordinates
+  _ships = []; // All ships on this board
 
   constructor() {
     // 10x10 ocean board
@@ -72,6 +73,9 @@ class Gameboard {
       this.board[coordinate[0]][coordinate[1]] = 1;
       this._coordinateMap.set(`${coordinate[0]},${coordinate[1]}`, ship);
     });
+
+    // Place ship in the ships counter
+    this._ships.push(ship);
     
     return true;
   }
@@ -80,6 +84,8 @@ class Gameboard {
   // and then sends the ‘hit’ function to the correct ship, 
   // or records the coordinates of the missed shot.
   receiveAttack(x, y) {
+    // Check if was already a missed shot
+    if (this.board[x][y] == 2) { return false; }
 
     // Check if cell with coordinates contains a ship
     if (this.board[x][y] == 0) {
@@ -96,6 +102,11 @@ class Gameboard {
     ship.hit();
 
     return true;
+  }
+
+  // Returns true if all ships on the board have been sunk
+  allShipsSunk() {
+    return this._ships.every(ship => ship.isSunk());
   }
 }
 

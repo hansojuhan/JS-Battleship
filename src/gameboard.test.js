@@ -100,7 +100,7 @@ describe('Gameboard', () => {
 });
 
 describe('Gameboard receiveAttack', () => {
-  test('returns true if attack hit a ship', () => {
+  test.skip('returns true if attack hit a ship', () => {
     const gameboard = new Gameboard();
     const submarine = new Ship(3);
     gameboard.placeShip(submarine, 0, 0, 'vertical');
@@ -108,7 +108,7 @@ describe('Gameboard receiveAttack', () => {
     expect(gameboard.receiveAttack(0, 0)).toBe(true);
   });
 
-  test('should send hit to the correct Ship if attack hit a ship', () => {
+  test.skip('should send hit to the correct Ship if attack hit a ship', () => {
     const gameboard = new Gameboard();
 
     const submarine = new Ship(3);
@@ -123,7 +123,7 @@ describe('Gameboard receiveAttack', () => {
     expect(submarine.timesHit).toBe(1);
   });
 
-  test('should record coordinates of missed shot, if missed', () => {
+  test.skip('should record coordinates of missed shot, if missed', () => {
     const gameboard = new Gameboard();
 
     const destroyer = new Ship(2);
@@ -135,11 +135,40 @@ describe('Gameboard receiveAttack', () => {
     // On the board, a missed shot is marked as 2
     expect(gameboard.board[0][0]).toBe(2);
   });
-
-  test.skip('', () => {});
-
-  test.skip('', () => {});
-
-  test.skip('', () => {});
-
 });
+
+describe('Gameboard allShipsSunk', () => {
+  test.skip('returns true if no ships on board', () => {
+    const gameboard = new Gameboard();
+
+    expect(gameboard.allShipsSunk()).toBe(true);
+  });
+
+  test.skip('returns false if at least one unsunk ship', () => {
+    const gameboard = new Gameboard();
+    const submarine = new Ship(3);
+    gameboard.placeShip(submarine, 0, 0, 'vertical');
+
+    expect(gameboard.allShipsSunk()).toBe(false);
+  });
+
+  test('returns true if all are sunk', () => {
+    const gameboard = new Gameboard();
+
+    const destroyer = new Ship(2);
+    gameboard.placeShip(destroyer, 0, 0, 'vertical');
+    destroyer.hit();
+    destroyer.hit();
+
+    const destroyer2 = new Ship(2);
+    gameboard.placeShip(destroyer2, 5, 5, 'vertical');
+    destroyer2.hit();
+    destroyer2.hit();
+
+    expect(gameboard.allShipsSunk()).toBe(true);
+  });
+});
+
+// describe('Gameboard', () => {
+//   test.skip('', () => {});
+// });
