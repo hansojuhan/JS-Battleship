@@ -34,15 +34,26 @@ describe('Gameboard', () => {
     }
   });
 
-  // test('should be able to place a ship in the area horizontally', () => {
-  //   const gameboard = new Gameboard();
-  //   const submarine = new Ship(3);
+  test('should be able to place a ship in the area horizontally', () => {
+    const gameboard = new Gameboard();
+    const submarine = new Ship(3);
 
-  //   // Place ship at coordinate x, coordinate y, 'horizontally'
-  //   expect(gameboard.placeShip(submarine, 0, 0, 'horizontal')).toBe(true);
-  // });
+    // Place ship at coordinate x, coordinate y, 'horizontally'
+    expect(gameboard.placeShip(submarine, 5, 5, 'horizontal')).toBe(true);
 
-  // test('should not be able to place a ship out of bounds', () => {
+    // Check each square on the board and verify only 3 have been filled in
+    for (let x = 0; x < 10; x++) {
+      for (let y = 0; y < 10; y++) {
+        if ((x == 5 && y == 5) || (x == 5 && y == 6) || (x == 5 && y == 7)) {
+          expect(gameboard.board[x][y]).toBe(1);
+        } else {
+          expect(gameboard.board[x][y]).toBe(0);
+        }
+      }
+    }
+  });
+
+  test('should not be able to place a ship out of bounds', () => {
 
 
   // });
