@@ -2,11 +2,11 @@
 // Styles
 import "./css/styles.css";
 import "./css/modal.css";
-
 import favicon from './img/battleship.png';
 
 // Module imports
 import { renderCurrentTurnPlayerName, renderGameBoard, renderPlayerNames, renderGameOver } from "./js/dom";
+import { loadFavicon } from "./js/utils";
 
 // Class imports
 // const Gameboard = require('./js/gameboard');
@@ -20,7 +20,7 @@ const GameState = require('./js/gamestate');
 // On window refresh
 window.onload = () => {
   // Load faviocn
-  loadFavicon(favicon);
+  loadFavicon(favicon, 'Battleship icons created by Umeicon - Flaticon');
 
   // New game button listener to open modal
   const openNewGameModalButton = document.getElementById('new-game-button');
@@ -35,7 +35,6 @@ window.onload = () => {
     const newGameModal = document.getElementById('start-game-modal');
     newGameModal.close();
   });
-  
   
   // Start game button listener to submit new game form
   const startNewGameButton = document.getElementById('start-game-button');
@@ -66,8 +65,8 @@ function initialiseGame() {
 
   renderGameBoard(1);
   renderGameBoard(2);
-  renderPlayerNames();
 
+  renderPlayerNames();
   renderCurrentTurnPlayerName();
 }
 
@@ -149,13 +148,3 @@ function populateTestData() {
   console.log(GameState.getPlayerBoard(2));
 }
 
-function loadFavicon(image) {
-  // Load favicon
-  const favicon = document.createElement('link');
-  favicon.rel = 'icon';
-  favicon.href= image;
-  favicon.type = 'image/x-icon'
-  favicon.innerText = 'Battleship icons created by Umeicon - Flaticon';
-  const head = document.querySelector('head');
-  head.append(favicon);
-}
