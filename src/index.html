@@ -3,10 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My New App</title>
+  <title>Battleship</title>
 </head>
 <body>
+
+  <!-- New game button -->
+   <button id="new-game-button" type="button">New game</button>
+
   <!-- Content -->
   <div id="content"></div>
+
+  <!-- Start modal -->
+  <dialog id="start-game-modal">
+    <form>
+      <div>
+        <h2>New game</h2>
+        <button id="close-start-game-modal" type="button">x</button>
+      </div>
+      
+      <div>
+        <label for="player-1-name">Player 1 name</label>
+        <input name="player-1-name" type="text" placeholder="Player 1" autofocus required>
+      </div>
+
+      <div>
+        <label for="player-2-name">Player 2 name</label>
+        <input name="player-2-name" type="text" placeholder="Player 2" required>
+      </div>
+
+      <button id="start-game-button" type="button">Start!</button>
+    </form>
+  </dialog>
 </body>
 </html>

@@ -15,4 +15,29 @@
   --very-dark: #7a7a7a;
   
   --border-radius: 0.25rem;
+
+  --board-size: 500px;
+}
+
+body {
+  background-color: #070945;
+}
+
+.board-container {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  gap: 5px;
+
+  width: var(--board-size);
+  height: var(--board-size);
+}
+
+.board-cell {
+  background-color: lightblue;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
 }
