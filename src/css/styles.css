@@ -1,28 +1,20 @@
-@font-face {
-  font-family: "Inter";
-  src: url("../fonts/Inter-VariableFont_opsz,wght.ttf");
-}
-
 :root {
-  font-family: "Inter";
-
-  /* Colors */
-  --primary: lightblue;
-  --secondary: #9022f1; 
-  --light: #ffffff;
-  --medium: #fefefe;
-  --dark: #f2f2f2;
-  --very-dark: #7a7a7a;
-  
-  --border-radius: 0.25rem;
+  font-family: monospace;
 
   --board-size: 500px;
-
-  color: white;
+  
+  /* Colors */
+  color: rgb(235, 235, 235);
+  
+  --water: #24d1f0bc;
+  --ship: #1cc11a;
+  --hit: #839087;
+  --missed-hit: #0a8297bc;
 }
 
 body {
   background-color: #070945;
+  user-select: none;
 }
 
 .board-container {
@@ -35,13 +27,23 @@ body {
   height: var(--board-size);
 }
 
+/* Cell */
 .board-cell {
-  background-color: lightblue;
-  border: 1px solid #ccc;
+  background-color: var(--water);
+  border-radius: 2px;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 2rem;
+}
+
+.board-cell:hover {
+  opacity: 0.8;
+
+}
+.board-cell:active {
+  opacity: 0.5;
 }
 
 /* Main container for both boards */
@@ -55,7 +57,15 @@ body {
 
 /* Cell containing a ship (value = 1) */
 .ship {
-  background-color:#9022f1;
+  background-color: var(--ship);
+}
+
+.hit {
+  background-color: var(--hit);
+}
+
+.missed-hit {
+  background-color: var(--missed-hit);
 }
 
 /* Header */

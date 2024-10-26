@@ -1,6 +1,7 @@
 /************************  Imports    ************************/
 // Gamestate singleton
 const GameState = require("./gamestate");
+import { processCellClick } from "..";
 
 /************************  Functions  ************************/
 // Clears and rerenders the board based on player number
@@ -24,41 +25,26 @@ export function renderGameBoard(playerNumber) {
       boardCell.dataset.y = y;
       // Set value for the cell
       const cellValue = GameState.getPlayerBoard(playerNumber)[x][y];
-      boardCell.innerText = cellValue;
       // Apply styles
       boardCell.classList.add('board-cell');
-      if (cellValue == 1 ||cellValue == 3) {
+      if (cellValue == 1) {
         boardCell.classList.add('ship');
+        boardCell.innerText = '🚢';
+      } else if (cellValue == 2) {
+        boardCell.classList.add('missed-hit');
+        boardCell.innerText = '🌊';    
+
+      } else if (cellValue == 3) {
+        boardCell.classList.add('hit');
+        boardCell.innerText = '💥';    
       }
       // Add an event listener to listen for the click
-      boardCell.addEventListener('click', (event) => cellClick(event));
+      boardCell.addEventListener('click', (event) => processCellClick(event));
     }
   }
 
   // Attach to content
-  // content = document.getElementById('content');
   content.append(container);
-}
-
-
-function cellClick(event) {
-  const targetPlayer = event.target.dataset.player;
-  const x = event.target.dataset.x;
-  const y = event.target.dataset.y;
-
-  // Allow clicks only on the opponent's board
-  if (targetPlayer == GameState.getCurrentTurn()) {
-    console.log("Don't attack your own ships!");
-    return false;
-  }
-
-  // In case of a successful attack
-  if (GameState.attackShip(targetPlayer, x, y)) {
-    renderGameBoard(targetPlayer);
-    // Advance turn to the next player
-    GameState.advanceCurrentTurn();
-    renderCurrentTurnPlayerName();
-  }
 }
 
 // Checks which player has the turn and renders name on the screen

@@ -56,28 +56,25 @@ window.onload = () => {
   });
 }
 
-// Main game flow
-function gameflow() {
-  // Empty screen at first
-  // New game button
-  // Create two players
-  // Let enter name of both players
-  // Click start to start
 
-  /**
-   * show side by side two screens for both players
-   * 
-   * populate testdata for both players
-   * 
-   * show turns
-   * if player one turn, allow clicking on player 2 board
-   * each cell has an event listener
-   * triggers receive attack
-   * result can be either a hit or a missed hit
-   * 
-   * next step: display turn
-   * 
-   */
+export function processCellClick(event) {
+  const targetPlayer = event.target.dataset.player;
+  const x = event.target.dataset.x;
+  const y = event.target.dataset.y;
+
+  // Allow clicks only on the opponent's board
+  if (targetPlayer == GameState.getCurrentTurn()) {
+    console.log("Don't attack your own ships!");
+    return false;
+  }
+
+  // In case of a successful attack
+  if (GameState.attackShip(targetPlayer, x, y)) {
+    renderGameBoard(targetPlayer);
+    // Advance turn to the next player
+    GameState.advanceCurrentTurn();
+    renderCurrentTurnPlayerName();
+  }
 }
 
 function populateTestData() {
