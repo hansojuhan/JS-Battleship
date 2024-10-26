@@ -1,0 +1,53 @@
+/* Modal */
+#start-game-modal {
+  border-radius: 1rem;
+  box-shadow: 2px 2px 2px gray;
+
+  height: 45vh;
+  width: 45vh;
+
+  font-size: 2rem;
+}
+
+/* Close button */
+#close-start-game-modal {
+  width: 16px;
+  height: 16px;
+}
+
+#start-game-modal form div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+
+  width: 100%;
+}
+
+#start-game-modal form label {
+  font-size: 1.25rem;
+}
+
+#start-game-modal form input {
+  padding: 1rem 2rem;
+}
+
+#start-game-modal form button {
+  padding: 1rem 2rem;
+  background-color: rgb(155, 155, 247);
+
+  display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#start-game-modal form button:hover {
+  background-color: rgb(217, 217, 251);
+}
+
+/* Div with header and close button */
+#start-game-modal form div:first-child {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
