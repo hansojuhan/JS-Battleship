@@ -17,23 +17,38 @@ export function renderGameBoard(playerNumber) {
     for (let y = 0; y < 10; y++) {
 
       const boardCell = document.createElement('div');
-      boardCell.classList.add('board-cell');
-      boardCell.id = `cell-${playerNumber}-${x}-${y}`;
       container.append(boardCell);
-
+      // Set data
+      boardCell.dataset.player = playerNumber;
+      boardCell.dataset.x = x;
+      boardCell.dataset.y = y;
       // Set value for the cell
       const cellValue = GameState.getPlayerBoard(playerNumber)[x][y];
       boardCell.innerText = cellValue;
-      // Apply styles if there is a ship
-      if (cellValue == 1) {
+      // Apply styles
+      boardCell.classList.add('board-cell');
+      if (cellValue == 1 ||cellValue == 3) {
         boardCell.classList.add('ship');
       }
+      // Add an event listener to listen for the click
+      boardCell.addEventListener('click', (event) => cellClick(event));
     }
   }
 
   // Attach to content
   // content = document.getElementById('content');
   content.append(container);
+}
+
+
+function cellClick(event) {
+  const targetPlayer = event.target.dataset.player;
+  const x = event.target.dataset.x;
+  const y = event.target.dataset.y;
+
+  console.log(GameState.attackShip(targetPlayer, x, y));
+
+  renderGameBoard(targetPlayer);
 }
 
 // Checks which player has the turn and renders name on the screen

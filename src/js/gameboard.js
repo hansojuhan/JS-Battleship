@@ -75,9 +75,13 @@ class Gameboard {
     return true;
   }
 
-  // Takes a pair of coordinates, determines whether or not the attack hit a ship 
-  // and then sends the ‘hit’ function to the correct ship, 
-  // or records the coordinates of the missed shot.
+  /**
+   * Processes an attack at the specified coordinates on the game board.
+   * 
+   * @param {number} x - X-coordinate of the attack. 
+   * @param {number} y - Y-coordinate of the attack. 
+   * @returns {boolean} - Returns true for a succesful attack, otherwise false.
+   */
   receiveAttack(x, y) {
     // Check if was already a missed shot
     if (this.board[x][y] == 2) { return false; }
@@ -95,6 +99,12 @@ class Gameboard {
 
     // Hit the ship
     ship.hit();
+
+    // Mark the square as a successful hit (3)
+    this.board[x][y] = 3;
+
+    // Check if sunk, for the console message
+    ship.isSunk();
 
     return true;
   }

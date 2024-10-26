@@ -33,6 +33,24 @@ const GameState = (function() {
       // Place ship on selected player's board
       return targetPlayer.board.placeShip(ship, x, y, orientation);
     },
+    // Attack a ship on a player's board at coordinates x, y
+    attackShip: (player, x, y) => {
+      // Validate player
+      const targetPlayer = player == 1 ? player1 : player == 2 ? player2 : null;
+      if (!targetPlayer) {
+        console.log("Invalid player number. Use 1 or 2.");
+        return false;
+      }
+
+      // Validate coordinates
+      if (x < 0 || x > 9 || y < 0 || y > 9) {
+        console.log("Invalid coordinates. Must be between 0-9.");
+        return false;
+      }
+
+      // Send receive attack to the target's board at x, y
+      return targetPlayer.board.receiveAttack(x, y);
+    },
     getPlayerBoard: (player) => {
       // Validate player
       const targetPlayer = player == 1 ? player1 : player == 2 ? player2 : null;
