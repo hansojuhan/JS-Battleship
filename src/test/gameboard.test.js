@@ -131,8 +131,8 @@ describe('Gameboard receiveAttack', () => {
     const destroyer = new Ship(2);
     gameboard.placeShip(destroyer, 3, 3, 'vertical');
 
-    // receiveAttack() returns false in case of a miss 
-    expect(gameboard.receiveAttack(0, 0)).toBe(false);
+    // receiveAttack() returns true in case of a miss 
+    expect(gameboard.receiveAttack(0, 0)).toBe(true);
 
     // On the board, a missed shot is marked as 2
     expect(gameboard.board[0][0]).toBe(2);

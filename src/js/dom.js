@@ -46,9 +46,13 @@ function cellClick(event) {
   const x = event.target.dataset.x;
   const y = event.target.dataset.y;
 
-  console.log(GameState.attackShip(targetPlayer, x, y));
-
-  renderGameBoard(targetPlayer);
+  // In case of a successful attack
+  if (GameState.attackShip(targetPlayer, x, y)) {
+    renderGameBoard(targetPlayer);
+    // Advance turn to the next player
+    GameState.advanceCurrentTurn();
+    renderCurrentTurnPlayerName();
+  }
 }
 
 // Checks which player has the turn and renders name on the screen

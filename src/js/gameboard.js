@@ -80,33 +80,37 @@ class Gameboard {
    * 
    * @param {number} x - X-coordinate of the attack. 
    * @param {number} y - Y-coordinate of the attack. 
-   * @returns {boolean} - Returns true for a succesful attack, otherwise false.
+   * @returns {boolean} - Returns if a new successful or missed attack was registered on the board.
    */
   receiveAttack(x, y) {
-    // Check if was already a missed shot
-    if (this.board[x][y] == 2) { return false; }
+    switch (this.board[x][y]) {
+      // No ship
+      case 0:
+        // Mark as missed
+        this.board[x][y] = 2;
+        console.log('Missed shot!');
+        return true;
 
-    // Check if cell with coordinates contains a ship
-    if (this.board[x][y] == 0) {
-      // Mark as missed
-      this.board[x][y] = 2;
+      // Ship
+      case 1:
+        // Find the right ship on the coordinate
+        const ship = this._coordinateMap.get(`${x},${y}`);
+        // Hit the ship
+        ship.hit();
+        // Mark the square as a successful hit (3)
+        this.board[x][y] = 3;
+        // Check if sunk, for the console message
+        ship.isSunk();
+        return true;
 
-      return false;
+      // Missed shot
+      case 2: 
+        return false;
+
+      // Successful shot
+      case 3: 
+        return false;
     }
-
-    // Find the right ship on the coordinate
-    const ship = this._coordinateMap.get(`${x},${y}`);
-
-    // Hit the ship
-    ship.hit();
-
-    // Mark the square as a successful hit (3)
-    this.board[x][y] = 3;
-
-    // Check if sunk, for the console message
-    ship.isSunk();
-
-    return true;
   }
 
   // Returns true if all ships on the board have been sunk

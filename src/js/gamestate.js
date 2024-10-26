@@ -14,6 +14,9 @@ const GameState = (function() {
     getCurrentTurn: () => {
       return currentTurn;
     },
+    advanceCurrentTurn: () => {
+      currentTurn = currentTurn == 1 ? 2 : 1;
+    },
     getPlayerNames: () => {
       return { player1Name: player1.name, player2Name: player2.name };
     },
