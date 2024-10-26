@@ -3,8 +3,7 @@
   border-radius: 1rem;
   box-shadow: 2px 2px 2px gray;
 
-  height: 45vh;
-  width: 45vh;
+  min-width: 45vh;
 
   font-size: 2rem;
 }

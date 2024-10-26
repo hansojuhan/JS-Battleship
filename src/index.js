@@ -3,6 +3,8 @@
 import "./css/styles.css";
 import "./css/modal.css";
 
+import favicon from './img/battleship.png';
+
 // Module imports
 import { renderCurrentTurnPlayerName, renderGameBoard, renderPlayerNames, renderGameOver } from "./js/dom";
 
@@ -17,6 +19,9 @@ const GameState = require('./js/gamestate');
 /************************  Functions  ************************/
 // On window refresh
 window.onload = () => {
+  // Load faviocn
+  loadFavicon(favicon);
+
   // New game button listener to open modal
   const openNewGameModalButton = document.getElementById('new-game-button');
   openNewGameModalButton.addEventListener('click', () => {
@@ -142,4 +147,15 @@ function populateTestData() {
   // GameState.placeShip(2, player2Carrier, 4, 7, 'vertical');
 
   console.log(GameState.getPlayerBoard(2));
+}
+
+function loadFavicon(image) {
+  // Load favicon
+  const favicon = document.createElement('link');
+  favicon.rel = 'icon';
+  favicon.href= image;
+  favicon.type = 'image/x-icon'
+  favicon.innerText = 'Battleship icons created by Umeicon - Flaticon';
+  const head = document.querySelector('head');
+  head.append(favicon);
 }
