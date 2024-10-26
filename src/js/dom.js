@@ -4,24 +4,33 @@ const GameState = require("./gamestate");
 
 /************************  Functions  ************************/
 // Clears and rerenders the board based on player number
-export function renderGameBoard(player) {
+export function renderGameBoard(playerNumber) {
   // Clear content first 
-  let content = document.getElementById(`content-player-${player}`);
+  let content = document.getElementById(`content-player-${playerNumber}`);
   content.innerHTML = '';
 
   // Container div
   const container = document.createElement('div');
   container.classList.add(`board-container`);
-  container.id = `board-container-${player}`;
+  container.id = `board-container-${playerNumber}`;
   // 10x10 grid
   for (let x = 0; x < 10; x++) {
     for (let y = 0; y < 10; y++) {
 
       const boardCell = document.createElement('div');
       boardCell.classList.add('board-cell');
-      boardCell.id = `cell-${player}-${x}-${y}`;
+      boardCell.id = `cell-${playerNumber}-${x}-${y}`;
       container.append(boardCell);
-      
+
+      // Set value for the cell
+      const cellValue = GameState.getPlayerBoard(playerNumber)[x][y];
+      boardCell.innerText = cellValue;
+      // Apply styles if there is a ship
+      if (cellValue == 1) {
+        boardCell.classList.add('ship');
+      }
+
+
     }
   }
 

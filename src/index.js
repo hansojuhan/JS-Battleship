@@ -46,12 +46,12 @@ window.onload = () => {
     newGameModal.close();
   });
 
+  populateTestData();
 
   renderGameBoard(1);
   renderGameBoard(2);
   renderPlayerNames();
 
-  populateTestData();
 }
 
 // Main game flow
