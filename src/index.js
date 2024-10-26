@@ -46,7 +46,8 @@ window.onload = () => {
     newGameModal.close();
   });
 
-  renderGameBoard();
+  renderGameBoard(1);
+  renderGameBoard(2);
   renderPlayerNames();
 }
 

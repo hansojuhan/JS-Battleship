@@ -3,30 +3,30 @@
 const GameState = require("./gamestate");
 
 /************************  Functions  ************************/
-// Clears and rerenders the board
-export function renderGameBoard() {
+// Clears and rerenders the board based on player number
+export function renderGameBoard(player) {
   // Clear content first 
-  let content = document.getElementById('content');
+  let content = document.getElementById(`content-player-${player}`);
   content.innerHTML = '';
 
   // Container div
   const container = document.createElement('div');
-  container.classList.add('board-container');
-  
+  container.classList.add(`board-container`);
+  container.id = `board-container-${player}`;
   // 10x10 grid
   for (let x = 0; x < 10; x++) {
     for (let y = 0; y < 10; y++) {
 
       const boardCell = document.createElement('div');
       boardCell.classList.add('board-cell');
-      boardCell.id = `cell-${x}-${y}`;
+      boardCell.id = `cell-${player}-${x}-${y}`;
       container.append(boardCell);
       
     }
   }
 
   // Attach to content
-  content = document.getElementById('content');
+  // content = document.getElementById('content');
   content.append(container);
 }
 
