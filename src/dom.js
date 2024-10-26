@@ -30,6 +30,7 @@ export function renderGameBoard(player) {
   content.append(container);
 }
 
+// Renders player names
 export function renderPlayerNames() {
   const name1Title = document.getElementById('player-1-name');
   name1Title.innerText = `Player 1: ${GameState.getPlayerNames().player1Name}`;
