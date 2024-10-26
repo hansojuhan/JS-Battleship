@@ -46,6 +46,12 @@ function cellClick(event) {
   const x = event.target.dataset.x;
   const y = event.target.dataset.y;
 
+  // Allow clicks only on the opponent's board
+  if (targetPlayer == GameState.getCurrentTurn()) {
+    console.log("Don't attack your own ships!");
+    return false;
+  }
+
   // In case of a successful attack
   if (GameState.attackShip(targetPlayer, x, y)) {
     renderGameBoard(targetPlayer);
