@@ -36,8 +36,8 @@
   background-color: rgb(155, 155, 247);
 
   display: flex;
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
 #start-game-modal form button:hover {
