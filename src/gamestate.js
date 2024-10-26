@@ -1,5 +1,7 @@
+/************************  Imports    ************************/
 const Player = require('./player');
 
+/************************  Functions  ************************/
 // Singleton game state object
 const GameState = (function() {
   // Private variables

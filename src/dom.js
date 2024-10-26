@@ -1,6 +1,8 @@
+/************************  Imports    ************************/
 // Gamestate singleton
 const GameState = require("./gamestate");
 
+/************************  Functions  ************************/
 // Clears and rerenders the board
 export function renderGameBoard() {
   // Clear content first 

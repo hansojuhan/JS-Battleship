@@ -1,31 +1,20 @@
+/************************  Imports    ************************/
+// Styles
 import "./styles.css";
 import "./modal.css";
 
+// Module imports
 import { renderGameBoard, renderPlayerNames } from "./dom";
 
+// Class imports
 const Gameboard = require('./gameboard');
 const Ship = require('./ship');
 const Player = require('./player');
+// Game state import
 const GameState = require('./gamestate');
 
-// Main game flow
-function gameflow() {
-  
-  // Empty screen at first
-  // New game button
-  // Create two players
-  // Let enter name of both players
-  // Click start to start
-
-  /**
-   * show side by side two screens for both players
-   * 
-   */
-    // Populate ships for both screens
-
-
-}
-
+/************************  Functions  ************************/
+// On window refresh
 window.onload = () => {
   // New game button listener to open modal
   const openNewGameModalButton = document.getElementById('new-game-button');
@@ -61,5 +50,19 @@ window.onload = () => {
   renderPlayerNames();
 }
 
+// Main game flow
+function gameflow() {
+  // Empty screen at first
+  // New game button
+  // Create two players
+  // Let enter name of both players
+  // Click start to start
+
+  /**
+   * show side by side two screens for both players
+   * 
+   */
+    // Populate ships for both screens
+}
 
 
