@@ -5,9 +5,9 @@ const Player = require('./player');
 // Singleton game state object
 const GameState = (function() {
   // Private variables
-  let currentTurn = 1;
   let player1 = new Player();
   let player2 = new Player();
+  let currentTurn = 1;
 
   // Public methods
   return {

@@ -53,6 +53,18 @@ body {
   gap: 4rem;
 }
 
+/* Cell containing a ship (value = 1) */
 .ship {
   background-color:#9022f1;
+}
+
+/* Header */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header h2 {
+  width: 60%;
 }

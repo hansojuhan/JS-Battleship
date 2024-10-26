@@ -8,7 +8,6 @@ export function renderGameBoard(playerNumber) {
   // Clear content first 
   let content = document.getElementById(`content-player-${playerNumber}`);
   content.innerHTML = '';
-
   // Container div
   const container = document.createElement('div');
   container.classList.add(`board-container`);
@@ -29,14 +28,18 @@ export function renderGameBoard(playerNumber) {
       if (cellValue == 1) {
         boardCell.classList.add('ship');
       }
-
-
     }
   }
 
   // Attach to content
   // content = document.getElementById('content');
   content.append(container);
+}
+
+// Checks which player has the turn and renders name on the screen
+export function renderCurrentTurnPlayerName() {
+  const turnLabel = document.getElementById('current-turn');
+  turnLabel.innerText = GameState.getCurrentTurn() == 1 ? GameState.getPlayerNames().player1Name : GameState.getPlayerNames().player2Name;
 }
 
 // Renders player names

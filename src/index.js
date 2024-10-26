@@ -4,7 +4,7 @@ import "./css/styles.css";
 import "./css/modal.css";
 
 // Module imports
-import { renderGameBoard, renderPlayerNames } from "./js/dom";
+import { renderCurrentTurnPlayerName, renderGameBoard, renderPlayerNames } from "./js/dom";
 
 // Class imports
 const Gameboard = require('./js/gameboard');
@@ -44,14 +44,16 @@ window.onload = () => {
     // Close modal
     const newGameModal = document.getElementById('start-game-modal');
     newGameModal.close();
+
+    // Initialising
+    populateTestData();
+  
+    renderGameBoard(1);
+    renderGameBoard(2);
+    renderPlayerNames();
+  
+    renderCurrentTurnPlayerName();
   });
-
-  populateTestData();
-
-  renderGameBoard(1);
-  renderGameBoard(2);
-  renderPlayerNames();
-
 }
 
 // Main game flow
@@ -66,6 +68,14 @@ function gameflow() {
    * show side by side two screens for both players
    * 
    * populate testdata for both players
+   * 
+   * show turns
+   * if player one turn, allow clicking on player 2 board
+   * each cell has an event listener
+   * triggers receive attack
+   * result can be either a hit or a missed hit
+   * 
+   * next step: display turn
    * 
    */
 }
