@@ -11,13 +11,19 @@ class Ship {
   hit() {
     this.timesHit++;
 
-    // console.log(`Ship is hit! Times hit: ${this.timesHit}`);
+    console.log(`Ship is hit! Times hit: ${this.timesHit}`);
   }
 
   // Calculates whether a ship is considered sunk based on its length 
   // and the number of hits it has received
   isSunk() {
-    return this.timesHit >= this.length ? true : false;
+    // return this.timesHit >= this.length ? true : false;
+    if (this.timesHit >= this.length) {
+      console.log('Ship is destroyed!');
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
