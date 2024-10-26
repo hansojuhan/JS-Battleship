@@ -1,3 +1,6 @@
+// Gamestate singleton
+import GameState from './index.js';
+
 // Clears and rerenders the board
 export function renderGameBoard() {
   // Clear content first 
@@ -25,7 +28,10 @@ export function renderGameBoard() {
   content.append(container);
 }
 
-export function renderPlayerName(number, name) {
-  const nameTitle = document.getElementById(`player-${number}-name`);
-  nameTitle.innerText = `Player ${number}: ${name}`;
+export function renderPlayerNames() {
+  const name1Title = document.getElementById('player-1-name');
+  name1Title.innerText = `Player 1: ${GameState.getPlayerNames().player1Name}`;
+
+  const name2Title = document.getElementById('player-2-name');
+  name2Title.innerText = `Player 2: ${GameState.getPlayerNames().player2Name}`;
 }

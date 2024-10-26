@@ -1,11 +1,34 @@
 import "./styles.css";
 import "./modal.css";
 
-import { renderGameBoard, renderPlayerName } from "./dom";
+import { renderGameBoard, renderPlayerNames } from "./dom";
 
 const Gameboard = require('./gameboard');
 const Ship = require('./ship');
 const Player = require('./player');
+
+// Singleton game state object
+const GameState = (function() {
+  // Private variables
+  let currentTurn = 1;
+  let player1Name = '';
+  let player2Name = '';
+
+  // Public methods
+  return {
+    getCurrentTurn: () => {
+      return currentTurn;
+    },
+    getPlayerNames: () => {
+      return { player1Name, player2Name };
+    },
+    setPlayerNames: (name1, name2) => {
+      player1Name = name1;
+      player2Name = name2;
+    },
+  };
+})();
+export default GameState;
 
 // Main game flow
 function gameflow() {
@@ -47,9 +70,10 @@ window.onload = () => {
     // Get from form the names
     const name1 = document.querySelector('input[name="player-1-name"]').value.trim();
     const name2 = document.querySelector('input[name="player-2-name"]').value.trim();
+    // Set names
+    GameState.setPlayerNames(name1, name2);
     // Render names
-    renderPlayerName(1, name1);
-    renderPlayerName(2, name2);
+    renderPlayerNames();
     // Close modal
     const newGameModal = document.getElementById('start-game-modal');
     newGameModal.close();
