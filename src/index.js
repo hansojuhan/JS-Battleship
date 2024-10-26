@@ -7,9 +7,10 @@ import "./css/modal.css";
 import { renderCurrentTurnPlayerName, renderGameBoard, renderPlayerNames, renderGameOver } from "./js/dom";
 
 // Class imports
-const Gameboard = require('./js/gameboard');
+// const Gameboard = require('./js/gameboard');
 const Ship = require('./js/ship');
-const Player = require('./js/player');
+// const Player = require('./js/player');
+
 // Game state import
 const GameState = require('./js/gamestate');
 
@@ -33,27 +34,36 @@ window.onload = () => {
   
   // Start game button listener to submit new game form
   const startNewGameButton = document.getElementById('start-game-button');
-  startNewGameButton.addEventListener('click', () => {
-    // Get from form the names
-    const name1 = document.querySelector('input[name="player-1-name"]').value.trim();
-    const name2 = document.querySelector('input[name="player-2-name"]').value.trim();
-    // Set names
-    GameState.setPlayerNames(name1, name2);
-    // Render names
-    renderPlayerNames();
-    // Close modal
-    const newGameModal = document.getElementById('start-game-modal');
-    newGameModal.close();
+  startNewGameButton.addEventListener('click', initialiseGame);
+}
 
-    // Initialising
-    populateTestData();
-  
-    renderGameBoard(1);
-    renderGameBoard(2);
-    renderPlayerNames();
-  
-    renderCurrentTurnPlayerName();
-  });
+/**
+ * Initialises a new game, resetting values and re-rendering the screen.
+ */
+function initialiseGame() {
+  // Reset gamestate
+  GameState.resetGame();
+
+  // Get from form the names
+  const name1 = document.querySelector('input[name="player-1-name"]').value.trim();
+  const name2 = document.querySelector('input[name="player-2-name"]').value.trim();
+  // Set names
+  GameState.setPlayerNames(name1, name2);
+  // Render names
+  renderPlayerNames();
+
+  // Close modal
+  const newGameModal = document.getElementById('start-game-modal');
+  newGameModal.close();
+
+  // Initialising
+  populateTestData();
+
+  renderGameBoard(1);
+  renderGameBoard(2);
+  renderPlayerNames();
+
+  renderCurrentTurnPlayerName();
 }
 
 /**
@@ -80,7 +90,7 @@ export function processCellClick(event) {
 
   // Attack the ship
   const attack = GameState.attackShip(targetPlayer, x, y);
-  
+
   // In case of an unsuccessful attack
   if (!attack) {
     console.log("Cannot attack there.");

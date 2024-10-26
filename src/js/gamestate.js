@@ -77,6 +77,11 @@ const GameState = (function() {
         return null;
       }
     },
+    resetGame: () => {
+      player1 = new Player();
+      player2 = new Player();
+      currentTurn = 1;
+    },
   };
 })();
 

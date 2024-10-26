@@ -49,8 +49,12 @@ export function renderGameBoard(playerNumber) {
 
 // Checks which player has the turn and renders name on the screen
 export function renderCurrentTurnPlayerName() {
-  const turnLabel = document.getElementById('current-turn');
-  turnLabel.innerText = GameState.getCurrentTurn() == 1 ? GameState.getPlayerNames().player1Name : GameState.getPlayerNames().player2Name;
+  const label = document.getElementById('turn-label');
+  label.innerText = 'Current turn: ';
+
+  const value = document.getElementById('current-turn');
+  value.innerText = GameState.getCurrentTurn() == 1 ? GameState.getPlayerNames().player1Name : GameState.getPlayerNames().player2Name;
+
 }
 
 // Renders player names
@@ -63,6 +67,9 @@ export function renderPlayerNames() {
 }
 
 export function renderGameOver() {
-  const label = document.getElementById('turn-counter');
+  const label = document.getElementById('turn-label');
+  const value = document.getElementById('current-turn');
+  
   label.innerText = `Game over! ${GameState.getWinner()} has won!`;
+  value.innerText = '';
 }
