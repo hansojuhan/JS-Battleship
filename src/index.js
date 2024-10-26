@@ -1,17 +1,17 @@
 /************************  Imports    ************************/
 // Styles
-import "./styles.css";
-import "./modal.css";
+import "./css/styles.css";
+import "./css/modal.css";
 
 // Module imports
-import { renderGameBoard, renderPlayerNames } from "./dom";
+import { renderGameBoard, renderPlayerNames } from "./js/dom";
 
 // Class imports
-const Gameboard = require('./gameboard');
-const Ship = require('./ship');
-const Player = require('./player');
+const Gameboard = require('./js/gameboard');
+const Ship = require('./js/ship');
+const Player = require('./js/player');
 // Game state import
-const GameState = require('./gamestate');
+const GameState = require('./js/gamestate');
 
 /************************  Functions  ************************/
 // On window refresh

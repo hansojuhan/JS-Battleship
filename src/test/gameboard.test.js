@@ -1,6 +1,6 @@
 // Import the Ship class
-const Gameboard = require('./gameboard');
-const Ship = require('./ship');
+const Gameboard = require('../js/gameboard');
+const Ship = require('../js/ship');
 
 describe('Gameboard', () => {
   test('should create a gameboard with a 10x10 area', () => {
