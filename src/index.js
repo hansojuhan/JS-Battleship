@@ -1,7 +1,7 @@
 import "./styles.css";
 import "./modal.css";
 
-import { renderGameBoard } from "./dom";
+import { renderGameBoard, renderPlayerName } from "./dom";
 
 const Gameboard = require('./gameboard');
 const Ship = require('./ship');
@@ -43,7 +43,17 @@ window.onload = () => {
   
   // Start game button listener to submit new game form
   const startNewGameButton = document.getElementById('start-game-button');
-  startNewGameButton
+  startNewGameButton.addEventListener('click', () => {
+    // Get from form the names
+    const name1 = document.querySelector('input[name="player-1-name"]').value.trim();
+    const name2 = document.querySelector('input[name="player-2-name"]').value.trim();
+    // Render names
+    renderPlayerName(1, name1);
+    renderPlayerName(2, name2);
+    // Close modal
+    const newGameModal = document.getElementById('start-game-modal');
+    newGameModal.close();
+  });
 
   renderGameBoard();
 }

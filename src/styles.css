@@ -17,6 +17,8 @@
   --border-radius: 0.25rem;
 
   --board-size: 500px;
+
+  color: white;
 }
 
 body {

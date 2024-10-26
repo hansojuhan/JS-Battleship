@@ -24,3 +24,8 @@ export function renderGameBoard() {
   content = document.getElementById('content');
   content.append(container);
 }
+
+export function renderPlayerName(number, name) {
+  const nameTitle = document.getElementById(`player-${number}-name`);
+  nameTitle.innerText = `Player ${number}: ${name}`;
+}
