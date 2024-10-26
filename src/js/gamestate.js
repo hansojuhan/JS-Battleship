@@ -63,7 +63,20 @@ const GameState = (function() {
       } 
 
       return targetPlayer.board.board;
-    }
+    },
+    // Returns true if all ships of a player have been sunk
+    isGameOver: () => {
+      return player1.board.allShipsSunk() || player2.board.allShipsSunk();
+    },
+    getWinner: () => {
+      if (player1.board.allShipsSunk()) {
+        return player2.name;
+      } else if (player2.board.allShipsSunk()) {
+        return player1.name;
+      } else {
+        return null;
+      }
+    },
   };
 })();
 

@@ -61,3 +61,8 @@ export function renderPlayerNames() {
   const name2Title = document.getElementById('player-2-name');
   name2Title.innerText = `Player 2: ${GameState.getPlayerNames().player2Name}`;
 }
+
+export function renderGameOver() {
+  const label = document.getElementById('turn-counter');
+  label.innerText = `Game over! ${GameState.getWinner()} has won!`;
+}

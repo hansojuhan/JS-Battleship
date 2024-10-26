@@ -4,7 +4,7 @@ import "./css/styles.css";
 import "./css/modal.css";
 
 // Module imports
-import { renderCurrentTurnPlayerName, renderGameBoard, renderPlayerNames } from "./js/dom";
+import { renderCurrentTurnPlayerName, renderGameBoard, renderPlayerNames, renderGameOver } from "./js/dom";
 
 // Class imports
 const Gameboard = require('./js/gameboard');
@@ -56,25 +56,50 @@ window.onload = () => {
   });
 }
 
-
+/**
+ * Processes a game move.
+ * 
+ * @param {Event} event - includes information on the cell that was clicked on.
+ * @returns nothing.
+ */
 export function processCellClick(event) {
   const targetPlayer = event.target.dataset.player;
   const x = event.target.dataset.x;
   const y = event.target.dataset.y;
 
+  // Check if game over
+  if (GameState.isGameOver()) {
+    return;
+  }
+
   // Allow clicks only on the opponent's board
   if (targetPlayer == GameState.getCurrentTurn()) {
     console.log("Don't attack your own ships!");
-    return false;
+    return;
   }
 
-  // In case of a successful attack
-  if (GameState.attackShip(targetPlayer, x, y)) {
-    renderGameBoard(targetPlayer);
-    // Advance turn to the next player
-    GameState.advanceCurrentTurn();
-    renderCurrentTurnPlayerName();
+  // Attack the ship
+  const attack = GameState.attackShip(targetPlayer, x, y);
+  
+  // In case of an unsuccessful attack
+  if (!attack) {
+    console.log("Cannot attack there.");
+    return;
   }
+
+  // Render updated board
+  renderGameBoard(targetPlayer);
+
+  // Check if game over after this move
+  if (GameState.isGameOver()) {
+    renderGameOver();
+    return;
+  }
+
+  // Advance turn to the next player
+  GameState.advanceCurrentTurn();
+  // Update player names on screen
+  renderCurrentTurnPlayerName();
 }
 
 function populateTestData() {
@@ -86,10 +111,10 @@ function populateTestData() {
   const player1Carrier = new Ship(5);
 
   GameState.placeShip(1, player1Destroyer, 0, 0, 'vertical');
-  GameState.placeShip(1, player1Submarine, 1, 2, 'horizontal');
-  GameState.placeShip(1, player1Cruiser, 0, 8, 'vertical');
-  GameState.placeShip(1, player1Battleship, 8, 1, 'horizontal');
-  GameState.placeShip(1, player1Carrier, 4, 9, 'vertical');
+  // GameState.placeShip(1, player1Submarine, 1, 2, 'horizontal');
+  // GameState.placeShip(1, player1Cruiser, 0, 8, 'vertical');
+  // GameState.placeShip(1, player1Battleship, 8, 1, 'horizontal');
+  // GameState.placeShip(1, player1Carrier, 4, 9, 'vertical');
 
   console.log(GameState.getPlayerBoard(1));
 
@@ -101,10 +126,10 @@ function populateTestData() {
   const player2Carrier = new Ship(5);
 
   GameState.placeShip(2, player2Destroyer, 1, 1, 'vertical');
-  GameState.placeShip(2, player2Submarine, 0, 3, 'horizontal');
-  GameState.placeShip(2, player2Cruiser, 3, 3, 'vertical');
-  GameState.placeShip(2, player2Battleship, 7, 1, 'horizontal');
-  GameState.placeShip(2, player2Carrier, 4, 7, 'vertical');
+  // GameState.placeShip(2, player2Submarine, 0, 3, 'horizontal');
+  // GameState.placeShip(2, player2Cruiser, 3, 3, 'vertical');
+  // GameState.placeShip(2, player2Battleship, 7, 1, 'horizontal');
+  // GameState.placeShip(2, player2Carrier, 4, 7, 'vertical');
 
   console.log(GameState.getPlayerBoard(2));
 }
