@@ -1,5 +1,5 @@
 // Gamestate singleton
-import GameState from './index.js';
+const GameState = require("./gamestate");
 
 // Clears and rerenders the board
 export function renderGameBoard() {

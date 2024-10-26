@@ -6,29 +6,7 @@ import { renderGameBoard, renderPlayerNames } from "./dom";
 const Gameboard = require('./gameboard');
 const Ship = require('./ship');
 const Player = require('./player');
-
-// Singleton game state object
-const GameState = (function() {
-  // Private variables
-  let currentTurn = 1;
-  let player1Name = '';
-  let player2Name = '';
-
-  // Public methods
-  return {
-    getCurrentTurn: () => {
-      return currentTurn;
-    },
-    getPlayerNames: () => {
-      return { player1Name, player2Name };
-    },
-    setPlayerNames: (name1, name2) => {
-      player1Name = name1;
-      player2Name = name2;
-    },
-  };
-})();
-export default GameState;
+const GameState = require('./gamestate');
 
 // Main game flow
 function gameflow() {
@@ -80,6 +58,7 @@ window.onload = () => {
   });
 
   renderGameBoard();
+  renderPlayerNames();
 }
 
 
