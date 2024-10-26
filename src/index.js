@@ -46,9 +46,12 @@ window.onload = () => {
     newGameModal.close();
   });
 
+
   renderGameBoard(1);
   renderGameBoard(2);
   renderPlayerNames();
+
+  populateTestData();
 }
 
 // Main game flow
@@ -62,8 +65,39 @@ function gameflow() {
   /**
    * show side by side two screens for both players
    * 
+   * populate testdata for both players
+   * 
    */
-    // Populate ships for both screens
 }
 
+function populateTestData() {
+  // Player 1
+  const player1Destroyer = new Ship(2);
+  const player1Submarine = new Ship(3);
+  const player1Cruiser = new Ship(3);
+  const player1Battleship = new Ship(4);
+  const player1Carrier = new Ship(5);
 
+  GameState.placeShip(1, player1Destroyer, 0, 0, 'vertical');
+  GameState.placeShip(1, player1Submarine, 1, 2, 'horizontal');
+  GameState.placeShip(1, player1Cruiser, 0, 8, 'vertical');
+  GameState.placeShip(1, player1Battleship, 8, 1, 'horizontal');
+  GameState.placeShip(1, player1Carrier, 4, 9, 'vertical');
+
+  console.log(GameState.getPlayerBoard(1));
+
+  // Player 1
+  const player2Destroyer = new Ship(2);
+  const player2Submarine = new Ship(3);
+  const player2Cruiser = new Ship(3);
+  const player2Battleship = new Ship(4);
+  const player2Carrier = new Ship(5);
+
+  GameState.placeShip(2, player2Destroyer, 1, 1, 'vertical');
+  GameState.placeShip(2, player2Submarine, 0, 3, 'horizontal');
+  GameState.placeShip(2, player2Cruiser, 3, 3, 'vertical');
+  GameState.placeShip(2, player2Battleship, 7, 1, 'horizontal');
+  GameState.placeShip(2, player2Carrier, 4, 7, 'vertical');
+
+  console.log(GameState.getPlayerBoard(2));
+}
