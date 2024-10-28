@@ -5,7 +5,7 @@ import "./css/modal.css";
 import favicon from './img/battleship.png';
 
 // Module imports
-import { renderCurrentTurnPlayerName, renderGameBoard, renderPlayerName, renderGameOver } from "./js/dom";
+import { renderCurrentTurnPlayerName, renderGameBoard, renderPlayerName, renderGameOver, addSetupCellListeners } from "./js/dom";
 import { loadFavicon } from "./js/utils";
 
 // Class imports
@@ -48,6 +48,7 @@ function initialiseGame() {
   // Reset gamestate
   GameState.resetGame();
 
+  // Reset names and boards
   const player1NameField = document.getElementById('player-1-name');
   player1NameField.innerText = '';
   const player1Board = document.getElementById('content-player-1');
@@ -74,7 +75,8 @@ function initialiseGame() {
   placeShips(1);
 }
 
-function finalizeSetup() {
+// Finalises setup after ship placement
+export function finalizeSetup() {
   // Render names
   renderPlayerName(1);
   renderPlayerName(2);
@@ -84,19 +86,12 @@ function finalizeSetup() {
   renderGameBoard(2, true);
 }
 
-/**
- * Processes a game move.
- * 
- * @param {Event} event - includes information on the cell that was clicked on.
- * @returns nothing.
- */
+// Processes a game move.
 export function processCellClick(event) {
   const targetPlayer = event.target.dataset.player;
   const x = event.target.dataset.x;
   const y = event.target.dataset.y;
 
-  console.log(x, y, targetPlayer);
-  
   // Check if game over
   if (GameState.isGameOver()) {
     return;
@@ -128,7 +123,7 @@ export function processCellClick(event) {
 
   // Advance turn to the next player
   GameState.advanceCurrentTurn();
-  
+
   // Update player names on screen
   renderCurrentTurnPlayerName();
 }
@@ -168,6 +163,7 @@ function populateTestData(player) {
     console.log(GameState.getPlayerBoard(2));
   }
 }
+
 function placeShips(player) {
   // Update label advising user to place the ships
   const label = document.getElementById('turn-label');
@@ -176,100 +172,9 @@ function placeShips(player) {
   value.innerText = '';
 
   // Render the board
-  renderGameBoard(1, false);
-  renderPlayerName(1);
+  renderGameBoard(player, false);
+  renderPlayerName(player);
 
   // Add cell listeners for placing ships 
   addSetupCellListeners(player);
-}
-
-function addSetupCellListeners(player) {
-  // Track currently hovered cell
-  let currentHoveredCell = null;
-  let orientation = 'horizontal';
-
-  // Change orientation on key press
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'r') {
-      orientation = orientation === 'horizontal' ? 'vertical' : 'horizontal';
-
-      // Reapply if a cell is currently hovered
-      if (currentHoveredCell) {
-        removeCellHighlight(player);
-        const { x, y } = currentHoveredCell;
-        highlightCells(player, x, y, orientation, true);
-      }
-    }
-  })
-
-  // Add listeners to board for hightlighting and placing the ship
-  for (let x = 0; x < 10; x++) {
-    for (let y = 0; y < 10; y++) {
-
-      // Find the right cell
-      const cell = document.querySelector(`[data-x="${x}"][data-y="${y}"][data-player="${player}"]`);
-
-      // Attach listeneres for mouse enter, leave, change orientation and place ship
-      cell.addEventListener('mouseenter', () => {
-        currentHoveredCell = { x, y }; // Track hovered cell
-        highlightCells(player, x, y, orientation, true)
-      });
-
-      cell.addEventListener('mouseleave', () => {
-        currentHoveredCell = null; // Track hovered cell
-        highlightCells(player, x, y, orientation, false)
-      });
-
-      // Place ship on click
-      cell.addEventListener('click', () => { 
-        // Attempt to place and record result
-        const successfullyPlaced = GameState.setupShip(player, x, y, orientation); 
-        
-        if (successfullyPlaced) {
-          // Rendering the board removes the listeners
-          renderGameBoard(player, false);
-          
-          console.log(GameState.allShipsPlaced());
-          
-          if (GameState.allShipsPlaced()) {
-            finalizeSetup();
-          } else {
-            // Re-add listeners
-            addSetupCellListeners(player, orientation);
-          }
-        }
-      });
-    }
-  }
-}
-
-function removeCellHighlight(player) {
-  const cells = document.querySelectorAll(`[data-player="${player}"]`);
-
-  // Remove listeners by replacing the cell with a clone of itself.
-  cells.forEach((cell) => {
-    cell.classList.remove('highlighted-cell');
-  });
-}
-
-function highlightCells(player, startX, startY, orientation, applyHighlight) {
-
-  const length = GameState.getShipSize();
-
-  for (let i = 0; i < length; i++) {
-    let x = orientation === 'horizontal' ? startX : startX + i;
-    let y = orientation === 'horizontal' ? startY + i : startY;
-
-    // Find cell by matching the data variables
-    const cell = document.querySelector(`[data-x="${x}"][data-y="${y}"][data-player="${player}"]`);
-
-    if (cell) {
-      // Apply styles to highlight these cells
-      if (applyHighlight) {
-        cell.classList.add('highlighted-cell');
-      } else {
-        cell.classList.remove('highlighted-cell');
-      }
-    }
-  }
 }

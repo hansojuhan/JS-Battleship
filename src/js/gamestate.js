@@ -62,8 +62,7 @@ const GameState = (function() {
       if (targetPlayer == 1) {
         player1.name = name;
         return;
-      }
-      if (targetPlayer == 2) {
+      } else if (targetPlayer == 2) {
         player2.name = name;
         return;
       }
