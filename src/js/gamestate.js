@@ -1,5 +1,6 @@
 /************************  Imports    ************************/
 const Player = require('./player');
+const Ship = require('./ship');
 
 /************************  Functions  ************************/
 // Singleton game state object
@@ -9,8 +10,38 @@ const GameState = (function() {
   let player2 = new Player();
   let currentTurn = 1;
 
+  let placeShipsCounter = 0;
+  let shipsToPlace = [2, 3, 3, 4, 5].map(length => new Ship(length));
+
   // Public methods
   return {
+    setupShip: (player, x, y, orientation) => {
+      // Validate player
+      const targetPlayer = player == 1 ? player1 : player == 2 ? player2 : null;
+      if (!targetPlayer) {
+        console.log("Invalid player number. Use 1 or 2.");
+        return false;
+      }
+
+      // Check if counter is less than amount of ships
+      if (placeShipsCounter <= shipsToPlace.length) {
+        // Attempt to place and record the resul
+        const successfullyPlaced = targetPlayer.board.placeShip(shipsToPlace[placeShipsCounter], x, y, orientation);
+        // Increment counter, if succesful
+        if (successfullyPlaced) {
+          placeShipsCounter++;
+          return true;
+        }
+      }
+      return false;
+    },
+    getShipSize: () => {
+      return shipsToPlace[placeShipsCounter].length;
+    },
+    allShipsPlaced: () => {
+      return placeShipsCounter >= shipsToPlace.length;
+    },
+
     getCurrentTurn: () => {
       return currentTurn;
     },
@@ -20,9 +51,22 @@ const GameState = (function() {
     getPlayerNames: () => {
       return { player1Name: player1.name, player2Name: player2.name };
     },
-    setPlayerNames: (name1, name2) => {
-      player1.name = name1;
-      player2.name = name2;
+    setPlayerName: (player, name) => {
+      // Validate player
+      const targetPlayer = player == 1 ? 1 : player == 2 ? 2 : null;
+      if (!targetPlayer) {
+        console.log("Invalid player number. Use 1 or 2.");
+        return false;
+      }
+
+      if (targetPlayer == 1) {
+        player1.name = name;
+        return;
+      }
+      if (targetPlayer == 2) {
+        player2.name = name;
+        return;
+      }
     },
     // Place a ship on a player's board
     placeShip: (player, ship, x, y, orientation) => {
@@ -81,6 +125,7 @@ const GameState = (function() {
       player1 = new Player();
       player2 = new Player();
       currentTurn = 1;
+      placeShipsCounter = 0;
     },
   };
 })();

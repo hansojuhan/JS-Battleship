@@ -42,6 +42,9 @@
 #start-game-modal form button:hover {
   background-color: rgb(217, 217, 251);
 }
+#start-game-modal form button:active {
+  background-color: rgb(157, 157, 250);
+}
 
 /* Div with header and close button */
 #start-game-modal form div:first-child {
