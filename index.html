@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Battleship</title>
+<script defer src="main.js"></script></head>
+<body>
+  <!-- New game button -->
+  <header>
+    <button id="new-game-button" type="button">New game</button>
+    <h2 id="turn-counter">
+      <span id="turn-label">Current turn: </span>
+      <span id="current-turn">-</span>
+    </h2>
+  </header>
+
+  <!-- Content -->
+  <div id="content">
+    
+    <div id="player-1-container">
+      <p id="player-1-name"></p>
+      <div id="content-player-1"></div>
+    </div>
+
+    <div id="player-2-container">
+      <p id="player-2-name"></p>
+      <div id="content-player-2"></div>
+    </div>
+
+  </div>
+
+  <!-- Start modal -->
+  <dialog id="start-game-modal">
+    <form>
+      <div>
+        <h2>New game</h2>
+        <button id="close-start-game-modal" type="button">x</button>
+      </div>
+
+      <div>
+        <label for="player-1-name">Player 1 name</label>
+        <input name="player-1-name" type="text" placeholder="Player 1" autofocus required>
+      </div>
+
+      <div>
+        <label for="player-2-name">Player 2 name</label>
+        <input name="player-2-name" type="text" placeholder="Player 2" required>
+      </div>
+
+      <button id="start-game-button" type="button">Start!</button>
+    </form>
+  </dialog>
+</body>
+</html>
